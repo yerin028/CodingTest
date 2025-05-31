@@ -1,1 +1,1 @@
-# CodingTest_Java
+# CodingTest
