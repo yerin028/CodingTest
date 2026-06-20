@@ -1,43 +1,25 @@
 class Solution {
     public String solution(String polynomial) {
-        String[] arr = polynomial.split(" ");
+        String[] arr = polynomial.split(" \\+ ");
         
-        int x = 0;
-        int num = 0;
+        int a = 0; 
+        int b = 0; 
         
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i].equals("+")) {
-                continue;
-            }
-            
-            if (arr[i].contains("x")) {
-                if (arr[i].equals("x")) {
-                    x += 1;
+        for (String s : arr) {
+            if (s.contains("x")) {
+                if (s.equals("x")) {
+                    a += 1;
                 } else {
-                    x += Integer.parseInt(arr[i].replace("x", ""));
+                    a += Integer.parseInt(s.replace("x", ""));
                 }
             } else {
-                num += Integer.parseInt(arr[i]);
+                b += Integer.parseInt(s);
             }
         }
         
-        String answer = "";
+        if (a == 0) return String.valueOf(b);
+        if (b == 0) return a == 1 ? "x" : a + "x";
         
-        if (x > 0) {
-            if (x == 1) {
-                answer += "x";
-            } else {
-                answer += x + "x";
-            }
-        }
-        
-        if (num > 0) {
-            if (!answer.equals("")) {
-                answer += " + ";
-            }
-            answer += num;
-        }
-        
-        return answer;
+        return a == 1 ? "x + " + b : a + "x + " + b;
     }
 }
